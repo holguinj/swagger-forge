@@ -1,0 +1,142 @@
+{
+  "apiVersion": null,
+  "swaggerVersion": "1.2",
+  "basePath": "http://hello.com",
+  "resourcePath": "/repositoryURL",
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "apis": [
+    {
+      "path": "/users/{user}/modules/{module}/releases/find.json",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find latest module for a user and module name",
+          "notes": "Requires both user and module to be defined.",
+          "responseClass": "Module",
+          "nickname": "getOrderById",
+          "produces": [
+            "application/json",
+            "application/xml"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "description": "The name of the user who maintains the module",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "path"
+            },
+            {
+              "name": "module",
+              "description": "The name of the module to be queried",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "path"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid ID supplied"
+            },
+            {
+              "code": 404,
+              "message": "Order not found"
+            }
+          ]
+        },
+        {
+          "method": "GET",
+          "summary": "Search for a module by name",
+          "notes": "Add some helpful notes about searching here.",
+          "responseClass": "Module",
+          "nickname": "searchModulesByName",
+          "parameters": [
+            {
+              "name": "searchTerm",
+              "description": "A string (or something) to search by",
+              "required": true,
+              "allowMultiple": true,
+              "dataType": "string",
+              "paramType": "path"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid query supplied"
+            },
+            {
+              "code": 404,
+              "message": "Uh oh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/store/order",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Place an order for a pet",
+          "notes": "",
+          "responseClass": "void",
+          "nickname": "placeOrder",
+          "parameters": [
+            {
+              "name": "body",
+              "description": "order placed for purchasing the pet",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "Order",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Order": {
+      "id": "Order",
+      "properties": {
+        "shipDate": {
+          "$ref": "Date"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "petId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "description": "Order Status",
+          "enum": [
+            "placed",
+            "approved",
+            "delivered"
+          ]
+        }
+      }
+    }
+  }
+}

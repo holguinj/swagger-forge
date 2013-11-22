@@ -4,15 +4,15 @@
   "apis": [
     {
       "path": "http://localhost:8000/api/v3/module",
-      "description": "Operations about modules"
+      "description": "Get information about modules"
     },
     {
       "path": "http://localhost:8000/api/v3/user",
-      "description": "Operations about users"
+      "description": "Get information about users"
     },
     {
       "path": "http://localhost:8000/api/v3/release",
-      "description": "Operations about releases"
+      "description": "Get information about releases"
     }
   ]
 }

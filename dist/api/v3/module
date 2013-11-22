@@ -9,6 +9,81 @@
   ],
   "apis": [
     {
+      "path": "/modules",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Search for modules",
+          "notes": "",
+          "responseClass": "void",
+          "nickname": "placeOrder",
+          "parameters": [
+            {
+              "name": "query",
+              "description": "General search query",
+              "required": false,
+              "allowMultiple": true,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "owner",
+              "description": "Search for modules with a given owner",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "tag",
+              "description": "Limits the results to modules that have the given tag",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "show_deleted",
+              "description": "Includes modules with no releases in the results",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "boolean",
+              "paramType": "query"
+            },            
+            {
+              "name": "sort_by",
+              "description": "Order results by 'rank', 'downloads', or 'latest_release'.",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "limit",
+              "description": "Limits the number of results per page (default is 20)",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "integer",
+              "paramType": "query"
+            },
+            {
+              "name": "offset",
+              "description": "Omits results from the beginning of the set, used for pagination (default is 0)",
+              "required": false,
+              "dataType": "integer",
+              "paramType": "query"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 400,
+              "message": "Invalid order"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "path": "/modules/{user}-{module}",
       "operations": [
         {
@@ -47,42 +122,6 @@
             {
               "code": 404,
               "message": "Order not found"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "path": "/modules",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Search for modules",
-          "notes": "",
-          "responseClass": "void",
-          "nickname": "placeOrder",
-          "parameters": [
-            {
-              "name": "query",
-              "description": "General search query",
-              "required": false,
-              "allowMultiple": true,
-              "dataType": "string",
-              "paramType": "path"
-            },
-            {
-              "name": "owner",
-              "description": "Search for modules with a given owner",
-              "required": false,
-              "allowMultiple": false,
-              "dataType": "string",
-              "paramType": "path"
-            }            
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid order"
             }
           ]
         }

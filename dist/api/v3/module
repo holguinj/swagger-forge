@@ -55,7 +55,7 @@
               "description": "Order results by 'rank', 'downloads', or 'latest_release'.",
               "required": false,
               "allowMultiple": false,
-              "dataType": "string",
+              "dataType": "sort_by",
               "paramType": "query"
             },
             {
@@ -75,7 +75,19 @@
             }
           ]
         }
-      ]
+      ],
+      "models": {
+        "sort_by": {
+        "id": "sort_by",
+        "type": "string",
+        "description": "Key to sort by",
+        "enum": [
+          "rank",
+          "downloads",
+          "latest_release"
+        ]
+      }
+      }
     },
     {
       "path": "/modules/{user}-{module}",
@@ -84,7 +96,6 @@
           "method": "GET",
           "summary": "Find latest module for a user and module name",
           "notes": "Requires both user and module to be defined.",
-          "responseClass": "Module",
           "nickname": "getOrderById",
           "produces": [
             "application/json",
@@ -111,36 +122,5 @@
         }
       ]
     }
-  ],
-  "models": {
-    "Order": {
-      "id": "Order",
-      "properties": {
-        "shipDate": {
-          "$ref": "Date"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "petId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "status": {
-          "type": "string",
-          "description": "Order Status",
-          "enum": [
-            "placed",
-            "approved",
-            "delivered"
-          ]
-        }
-      }
-    }
-  }
+  ]
 }

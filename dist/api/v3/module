@@ -1,15 +1,15 @@
 {
   "apiVersion": null,
   "swaggerVersion": "1.2",
-  "basePath": "http://hello.com",
-  "resourcePath": "/repositoryURL",
+  "basePath": "http://api.forge.puppetlabs.com/v3",
+  "resourcePath": "/",
   "produces": [
     "application/json",
     "application/xml"
   ],
   "apis": [
     {
-      "path": "/users/{user}/modules/{module}/releases/find.json",
+      "path": "/modules/{user}-{module}",
       "operations": [
         {
           "method": "GET",
@@ -49,54 +49,35 @@
               "message": "Order not found"
             }
           ]
-        },
-        {
-          "method": "GET",
-          "summary": "Search for a module by name",
-          "notes": "Add some helpful notes about searching here.",
-          "responseClass": "Module",
-          "nickname": "searchModulesByName",
-          "parameters": [
-            {
-              "name": "searchTerm",
-              "description": "A string (or something) to search by",
-              "required": true,
-              "allowMultiple": true,
-              "dataType": "string",
-              "paramType": "path"
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid query supplied"
-            },
-            {
-              "code": 404,
-              "message": "Uh oh"
-            }
-          ]
         }
       ]
     },
     {
-      "path": "/store/order",
+      "path": "/modules",
       "operations": [
         {
-          "method": "POST",
-          "summary": "Place an order for a pet",
+          "method": "GET",
+          "summary": "Search for modules",
           "notes": "",
           "responseClass": "void",
           "nickname": "placeOrder",
           "parameters": [
             {
-              "name": "body",
-              "description": "order placed for purchasing the pet",
-              "required": true,
+              "name": "query",
+              "description": "General search query",
+              "required": false,
+              "allowMultiple": true,
+              "dataType": "string",
+              "paramType": "path"
+            },
+            {
+              "name": "owner",
+              "description": "Search for modules with a given owner",
+              "required": false,
               "allowMultiple": false,
-              "dataType": "Order",
-              "paramType": "body"
-            }
+              "dataType": "string",
+              "paramType": "path"
+            }            
           ],
           "responseMessages": [
             {

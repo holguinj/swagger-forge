@@ -1,7 +1,7 @@
 {
   "apiVersion": null,
   "swaggerVersion": "1.2",
-  "basePath": "http://hello.com",
+  "basePath": "http://api.forge.puppetlabs.com/v3",
   "resourcePath": "/user",
   "produces": [
     "application/json",

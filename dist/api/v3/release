@@ -2,228 +2,116 @@
   "apiVersion": null,
   "swaggerVersion": "1.2",
   "basePath": "https://api.forge.puppetlabs.com/v3",
-  "resourcePath": "/user",
+  "resourcePath": "/releases",
   "produces": [
     "application/json",
     "application/xml"
   ],
   "apis": [
     {
-      "path": "/user",
+      "path": "/releases",
       "operations": [
         {
-          "method": "POST",
-          "summary": "Create user",
-          "notes": "This can only be done by the logged in user.",
+          "method": "GET",
+          "summary": "Get a list of releases",
+          "notes": "Returns a paginated list of results.",
           "responseClass": "void",
-          "nickname": "createUser",
+          "nickname": "getRelease",
           "parameters": [
             {
-              "name": "body",
-              "description": "Created user object",
-              "required": true,
+              "name": "module",
+              "description": "Takes the form of '{user}-{module}', limits the results to releases of that module",
+              "required": false,
               "allowMultiple": false,
-              "dataType": "User",
-              "paramType": "body"
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "owner",
+              "description": "Limits results to modules with a given owner",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "version",
+              "description": "Limits results to releases matching a version range (format?)",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "show_deleted",
+              "description": "Include deleted releases in the results",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "boolean",
+              "paramType": "query"
+            },
+            {
+              "name": "sort_by",
+              "description": "Order results by 'downloads', 'release_date', or 'module'.",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "query"
+            },
+            {
+              "name": "limit",
+              "description": "Limits the number of results per page (default is 20)",
+              "required": false,
+              "allowMultiple": false,
+              "dataType": "integer",
+              "paramType": "query"
+            },
+            {
+              "name": "offset",
+              "description": "Omits results from the beginning of the set, used for pagination (default is 0)",
+              "required": false,
+              "dataType": "integer",
+              "paramType": "query"
             }
           ]
         }
       ]
     },
     {
-      "path": "/user/createWithArray",
+      "path": "/releases/{user}-{module}-{version}",
       "operations": [
         {
-          "method": "POST",
-          "summary": "Creates list of users with given input array",
-          "notes": "",
+          "method": "GET",
+          "summary": "Returns information about a given release.",
+          "notes": "This operation does not accept any optional parameters.",
           "responseClass": "void",
           "nickname": "createUsersWithArrayInput",
           "parameters": [
             {
-              "name": "body",
-              "description": "List of user object",
-              "required": true,
-              "allowMultiple": false,
-              "dataType": "Array[User]",
-              "paramType": "body"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "path": "/user/createWithList",
-      "operations": [
-        {
-          "method": "POST",
-          "summary": "Creates list of users with given list input",
-          "notes": "",
-          "responseClass": "void",
-          "nickname": "createUsersWithListInput",
-          "parameters": [
-            {
-              "name": "body",
-              "description": "List of user object",
-              "required": true,
-              "allowMultiple": false,
-              "dataType": "List[User]",
-              "paramType": "body"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "path": "/user/{username}",
-      "operations": [
-        {
-          "method": "PUT",
-          "summary": "Updated user",
-          "notes": "This can only be done by the logged in user.",
-          "responseClass": "void",
-          "nickname": "updateUser",
-          "parameters": [
-            {
-              "name": "username",
-              "description": "name that need to be deleted",
+              "name": "user",
+              "description": "The owner of the module",
               "required": true,
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
             },
             {
-              "name": "body",
-              "description": "Updated user object",
-              "required": true,
-              "allowMultiple": false,
-              "dataType": "User",
-              "paramType": "body"
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid username supplied"
-            },
-            {
-              "code": 404,
-              "message": "User not found"
-            }
-          ]
-        },
-        {
-          "method": "DELETE",
-          "summary": "Delete user",
-          "notes": "This can only be done by the logged in user.",
-          "responseClass": "void",
-          "nickname": "deleteUser",
-          "parameters": [
-            {
-              "name": "username",
-              "description": "The name that needs to be deleted",
+              "name": "module",
+              "description": "The module name",
               "required": true,
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid username supplied"
             },
             {
-              "code": 404,
-              "message": "User not found"
-            }
-          ]
-        },
-        {
-          "method": "GET",
-          "summary": "Get user by user name",
-          "notes": "",
-          "responseClass": "User",
-          "nickname": "getUserByName",
-          "produces": [
-            "application/json",
-            "application/xml"
-          ],
-          "parameters": [
-            {
-              "name": "username",
-              "description": "The name that needs to be fetched. Use user1 for testing.",
+              "name": "version",
+              "description": "The version number",
               "required": true,
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid username supplied"
-            },
-            {
-              "code": 404,
-              "message": "User not found"
-            }
+            }            
           ]
-        }
-      ]
-    },
-    {
-      "path": "/user/login",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Logs user into the system",
-          "notes": "",
-          "responseClass": "string",
-          "nickname": "loginUser",
-          "produces": [
-            "text/plain"
-          ],
-          "parameters": [
-            {
-              "name": "username",
-              "description": "The user name for login",
-              "required": true,
-              "allowMultiple": false,
-              "dataType": "string",
-              "paramType": "query"
-            },
-            {
-              "name": "password",
-              "description": "The password for login in clear text",
-              "required": true,
-              "allowMultiple": false,
-              "dataType": "string",
-              "paramType": "query"
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid username and password combination"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "path": "/user/logout",
-      "operations": [
-        {
-          "method": "GET",
-          "summary": "Logs out current logged in user session",
-          "notes": "",
-          "responseClass": "void",
-          "nickname": "logoutUser",
-          "produces": [
-            "text/plain"
-          ],
-          "parameters": []
         }
       ]
     }

@@ -73,12 +73,6 @@
               "dataType": "integer",
               "paramType": "query"
             }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid order"
-            }
           ]
         }
       ]
@@ -112,16 +106,6 @@
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 400,
-              "message": "Invalid ID supplied"
-            },
-            {
-              "code": 404,
-              "message": "Order not found"
             }
           ]
         }

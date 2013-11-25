@@ -14,7 +14,7 @@
         {
           "method": "GET",
           "summary": "Get a list of users",
-          "notes": "By default, results are returned in alphabetical order by 'username' and paginated with 20 users per page. Results can also be sorted by 'modules', 'releases', 'downloads', or 'latest_release'.",
+          "notes": "By default, results are returned in alphabetical order by username and paginated with 20 users per page.",
           "responseClass": "void",
           "nickname": "getUser",
           "parameters": [
@@ -24,7 +24,14 @@
               "required": false,
               "allowMultiple": false,
               "dataType": "string",
-              "paramType": "query"
+              "paramType": "query",
+              "defaultValue": "",
+              "enum": [
+                "username",
+                "releases",
+                "downloads",
+                "latest_release"
+              ]
             },
             {
               "name": "limit",

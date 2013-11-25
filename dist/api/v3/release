@@ -52,11 +52,17 @@
             },
             {
               "name": "sort_by",
-              "description": "Order results by 'downloads', 'release_date', or 'module'.",
+              "description": "Change the order in which results are returned.",
               "required": false,
               "allowMultiple": false,
               "dataType": "string",
-              "paramType": "query"
+              "paramType": "query",
+              "defaultValue": "",
+              "enum": [
+                "downloads",
+                "release_date",
+                "module"
+              ]
             },
             {
               "name": "limit",

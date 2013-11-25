@@ -52,11 +52,17 @@
             },            
             {
               "name": "sort_by",
-              "description": "Order results by 'rank', 'downloads', or 'latest_release'.",
+              "description": "Change the order in which results are returned.",
               "required": false,
               "allowMultiple": false,
               "dataType": "sort_by",
-              "paramType": "query"
+              "paramType": "query",
+              "defaultValue": "",
+              "enum": [
+                "rank",
+                "downloads",
+                "latest_release"
+              ]
             },
             {
               "name": "limit",

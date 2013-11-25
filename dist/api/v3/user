@@ -15,7 +15,7 @@
           "method": "GET",
           "summary": "Get a list of users",
           "notes": "By default, results are returned in alphabetical order by username and paginated with 20 users per page.",
-          "responseClass": "void",
+          "responseClass": "User",
           "nickname": "getUser",
           "parameters": [
             {
@@ -59,7 +59,7 @@
           "method": "GET",
           "summary": "Get data about a given user",
           "notes": "Returns a bunch of data about the specified user.",
-          "responseClass": "void",
+          "responseClass": "User",
           "nickname": "getUser",
           "parameters": [
             {
@@ -79,37 +79,45 @@
     "User": {
       "id": "User",
       "properties": {
-        "email": {
-          "type": "string"
+        "uri": {
+          "type": "string",
+          "required": true,
+          "description": "the URI at which this users specifics can be found"
+        },
+        "gravatar_id": {
+          "type": "string",
+          "required": true,
+          "description": "the user's avatar ID from gravatar.com"
         },
         "username": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "the username of this user"
         },
-        "userStatus": {
+        "display_name": {
+          "type": "string",
+          "required": true,
+          "description": "the user's display name"
+        },
+        "release_count": {
           "type": "integer",
-          "format": "int32",
-          "description": "User Status",
-          "enum": [
-            "1-registered",
-            "2-active",
-            "3-closed"
-          ]
+          "required": true,
+          "description": "the number of releases this user has published"
         },
-        "lastName": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "id": {
+        "module_count": {
           "type": "integer",
-          "format": "int64"
+          "required": true,
+          "description": "the number of modules this user has published"
         },
-        "phone": {
-          "type": "string"
+        "created_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this user was created"
         },
-        "password": {
-          "type": "string"
+        "updated_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this user was last updated"
         }
       }
     }

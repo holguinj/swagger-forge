@@ -137,7 +137,7 @@
           "description": "the version of this release"
         },
         "module": {
-          "type": "object",
+          "$ref": "ModuleAbbreviated",
           "required": true,
           "description": "the abbreviated representation of this release's module"
         },
@@ -147,7 +147,8 @@
           "description": "the metadata.json for this release"
         },
         "tags": {
-          "type": "string []",
+          "type": "array",
+          "items": {"type": "string"},
           "required": true,
           "description": "the tags on this release"
         },
@@ -196,6 +197,21 @@
           "required": true,
           "description": "date when this release was deleted or nil"
         }
+      }
+    },
+    "ModuleAbbreviated": {
+      "id": "ModuleAbbreviated",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "required": true,
+          "description": "the URI for this module"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "the name of this module"
+        }        
       }
     }
   }

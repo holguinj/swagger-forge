@@ -3,10 +3,7 @@
   "swaggerVersion": "1.2",
   "basePath": "https://forgeapi.puppetlabs.com/v3",
   "resourcePath": "/",
-  "produces": [
-    "application/json",
-    "application/xml"
-  ],
+  "produces": ["application/json"],
   "apis": [
     {
       "path": "/modules",
@@ -15,8 +12,8 @@
           "method": "GET",
           "summary": "Search for modules",
           "notes": "",
-          "responseClass": "void",
-          "nickname": "placeOrder",
+          "responseClass": "Module",
+          "nickname": "getModules",
           "parameters": [
             {
               "name": "query",
@@ -81,19 +78,7 @@
             }
           ]
         }
-      ],
-      "models": {
-        "sort_by": {
-        "id": "sort_by",
-        "type": "string",
-        "description": "Key to sort by",
-        "enum": [
-          "rank",
-          "downloads",
-          "latest_release"
-        ]
-      }
-      }
+      ]
     },
     {
       "path": "/modules/{user}-{module}",
@@ -104,9 +89,9 @@
           "notes": "Requires both user and module to be defined.",
           "nickname": "getOrderById",
           "produces": [
-            "application/json",
-            "application/xml"
+            "application/json"
           ],
+          "responseClass": "Module",
           "parameters": [
             {
               "name": "user",
@@ -128,5 +113,62 @@
         }
       ]
     }
-  ]
+  ],
+  "models": {
+    "Module": {
+      "id": "Module",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "required": true,
+          "description": "the URI for this module"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "the name of this module"
+        },
+        "downloads": {
+          "type": "integer",
+          "required": true,
+          "description": "the number of times this module has been downloaded"
+        },
+        "created_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this module was created"
+        },
+        "updated_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this module was last updated"
+        },
+        "owner": {
+          "type": "object",
+          "required": true,
+          "description": "abbreviated user object for the modules owner"
+        },
+        "current_release": {
+          "type": "object",
+          "required": true,
+          "description": "full release object for the modules latest release"
+        },
+        "releases": {
+          "type": "object",
+          "required": true,
+          "description": "abbreviated release object for all releases of this module"
+        },
+        "homepage_url": {
+          "type": "string",
+          "required": true,
+          "description": "URL for the project's homepage"
+        },
+        "issues_url": {
+          "type": "string",
+          "required": true,
+          "description": "URL for the project's issue tracker"
+        }
+      }
+    }
+  }
 }

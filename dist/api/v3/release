@@ -15,7 +15,7 @@
           "method": "GET",
           "summary": "Get a list of releases",
           "notes": "Returns a paginated list of results.",
-          "responseClass": "void",
+          "responseClass": "Release",
           "nickname": "getRelease",
           "parameters": [
             {
@@ -90,7 +90,7 @@
           "method": "GET",
           "summary": "Returns information about a given release.",
           "notes": "This operation does not accept any optional parameters.",
-          "responseClass": "void",
+          "responseClass": "Release",
           "nickname": "createUsersWithArrayInput",
           "parameters": [
             {
@@ -123,40 +123,78 @@
     }
   ],
   "models": {
-    "User": {
-      "id": "User",
+    "Release": {
+      "id": "Release",
       "properties": {
-        "email": {
-          "type": "string"
+        "uri": {
+          "type": "string",
+          "required": true,
+          "description": "the URI for this release"
         },
-        "username": {
-          "type": "string"
+        "version": {
+          "type": "string",
+          "required": true,
+          "description": "the version of this release"
         },
-        "userStatus": {
+        "module": {
+          "type": "object",
+          "required": true,
+          "description": "the abbreviated representation of this release's module"
+        },
+        "metadata": {
+          "type": "object",
+          "required": true,
+          "description": "the metadata.json for this release"
+        },
+        "tags": {
+          "type": "string []",
+          "required": true,
+          "description": "the tags on this release"
+        },
+        "file_size": {
           "type": "integer",
-          "format": "int32",
-          "description": "User Status",
-          "enum": [
-            "1-registered",
-            "2-active",
-            "3-closed"
-          ]
+          "required": true,
+          "description": "the size of the module in bytes"
         },
-        "lastName": {
-          "type": "string"
+        "file_md5": {
+          "type": "string",
+          "required": true,
+          "description": "the md5 checksum of this module"
         },
-        "firstName": {
-          "type": "string"
-        },
-        "id": {
+        "downloads": {
           "type": "integer",
-          "format": "int64"
+          "required": true,
+          "description": "the number of times this release has been downloaded"
         },
-        "phone": {
-          "type": "string"
+        "readme": {
+          "type": "string",
+          "required": true,
+          "description": "the readme file extracted from this module, rendered as HTML"
         },
-        "password": {
-          "type": "string"
+        "changelog": {
+          "type": "string",
+          "required": true,
+          "description": "the changelog file extracted from this module, rendered as HTML"
+        },
+        "license": {
+          "type": "string",
+          "required": true,
+          "description": "the license file extracted from this module, rendered as HTML"
+        },
+        "created_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this release was created"
+        },
+        "updated_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this release was last changed"
+        },
+        "deleted_at": {
+          "type": "date-time",
+          "required": true,
+          "description": "date when this release was deleted or nil"
         }
       }
     }

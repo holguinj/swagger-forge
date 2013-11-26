@@ -1,0 +1,49 @@
+{
+  "apiVersion": null,
+  "swaggerVersion": "1.2",
+  "basePath": "http://www.corsproxy.com/forgeapi.puppetlabs.com/v3",
+  "resourcePath": "/files",
+  "produces": [
+    "application/x-gzip"
+  ],
+  "apis": [
+    {
+      "path": "/files/{owner}-{module}-{version}.tar.gz",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Download a module tarball for a given release",
+          "notes": "",
+          "responseClass": "void",
+          "nickname": "getModuleTarball",
+          "parameters": [
+            {
+              "name": "owner",
+              "description": "The owner of the module",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "path"
+            },
+            {
+              "name": "module",
+              "description": "The name of the module",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "path"
+            },
+            {
+              "name": "version",
+              "description": "Specifies the release version to be downloaded",
+              "required": true,
+              "allowMultiple": false,
+              "dataType": "string",
+              "paramType": "path"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

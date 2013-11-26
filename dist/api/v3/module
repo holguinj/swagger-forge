@@ -3,7 +3,9 @@
   "swaggerVersion": "1.2",
   "basePath": "http://www.corsproxy.com/forgeapi.puppetlabs.com/v3",
   "resourcePath": "/",
-  "produces": ["application/json"],
+  "produces": [
+    "application/json"
+  ],
   "apis": [
     {
       "path": "/modules",
@@ -46,7 +48,7 @@
               "allowMultiple": false,
               "dataType": "boolean",
               "paramType": "query"
-            },            
+            },
             {
               "name": "sort_by",
               "description": "Change the order in which results are returned.",
@@ -87,7 +89,7 @@
           "method": "GET",
           "summary": "Find latest module for a user and module name",
           "notes": "Requires both user and module to be defined.",
-          "nickname": "getOrderById",
+          "nickname": "getModule",
           "produces": [
             "application/json"
           ],
@@ -155,7 +157,9 @@
         },
         "releases": {
           "type": "array",
-          "items": {"$ref": "ReleaseAbbreviated"},
+          "items": {
+            "$ref": "ReleaseAbbreviated"
+          },
           "required": true,
           "description": "abbreviated release object for all releases of this module"
         },
@@ -211,7 +215,9 @@
         },
         "tags": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "required": true,
           "description": "the tags on this release"
         },
@@ -276,6 +282,6 @@
           "description": "the username of this user"
         }
       }
-    }    
+    }
   }
 }

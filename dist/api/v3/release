@@ -16,7 +16,7 @@
           "summary": "Get a list of releases",
           "notes": "Returns a paginated list of results.",
           "responseClass": "Release",
-          "nickname": "getRelease",
+          "nickname": "getReleases",
           "parameters": [
             {
               "name": "module",
@@ -91,7 +91,7 @@
           "summary": "Returns information about a given release.",
           "notes": "This operation does not accept any optional parameters.",
           "responseClass": "Release",
-          "nickname": "createUsersWithArrayInput",
+          "nickname": "getRelease",
           "parameters": [
             {
               "name": "user",
@@ -116,7 +116,7 @@
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
-            }            
+            }
           ]
         }
       ]
@@ -148,7 +148,9 @@
         },
         "tags": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "required": true,
           "description": "the tags on this release"
         },
@@ -211,7 +213,7 @@
           "type": "string",
           "required": true,
           "description": "the name of this module"
-        }        
+        }
       }
     }
   }

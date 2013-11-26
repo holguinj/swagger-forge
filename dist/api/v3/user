@@ -16,7 +16,7 @@
           "summary": "Get a list of users",
           "notes": "By default, results are returned in alphabetical order by username and paginated with 20 users per page.",
           "responseClass": "User",
-          "nickname": "getUser",
+          "nickname": "getUsers",
           "parameters": [
             {
               "name": "sort_by",

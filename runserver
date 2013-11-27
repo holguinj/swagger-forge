@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Starting swagger-forge demonstration at http://localhost:8000"
+cd dist && python -m SimpleHTTPServer 8000

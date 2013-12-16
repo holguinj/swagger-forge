@@ -4,8 +4,7 @@
   "basePath": "http://www.corsproxy.com/forgeapi.puppetlabs.com/v3",
   "resourcePath": "/user",
   "produces": [
-    "application/json",
-    "application/xml"
+    "application/json"
   ],
   "apis": [
     {
@@ -14,8 +13,8 @@
         {
           "method": "GET",
           "summary": "Get a list of users",
-          "notes": "By default, results are returned in alphabetical order by username and paginated with 20 users per page.",
-          "responseClass": "User",
+          "notes": "Provides information about Puppet Forge user accounts. By default, results are returned in alphabetical order by <br>username</b> and paginated with 20 users per page. It's also possible to sort by number of published <b>releases</b>, total <b>download</b> counts for all the user's modules, or by the date of the user's <b>latest release</b>.",
+          "responseClass": "Pagination",
           "nickname": "getUsers",
           "parameters": [
             {
@@ -64,7 +63,7 @@
           "parameters": [
             {
               "name": "user",
-              "description": "Get data about a particular user",
+              "description": "The username to query by",
               "required": false,
               "allowMultiple": false,
               "dataType": "string",
@@ -76,11 +75,54 @@
     }
   ],
   "models": {
+    "Pagination": {
+        "id": "Pagination",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "required": true,
+            "description": "the total number of results available"
+          },
+          "limit": {
+            "type": "integer",
+            "required": true,
+            "description": "the maximum size of the current page"
+          },
+          "offset": {
+            "type": "integer",
+            "required": true,
+            "description": "the index of the first result (zero-based)"
+          },
+          "current": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the current page of results"
+          },
+          "next": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the next page of results"
+          },
+          "previous": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the previous page of results (may be null)"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+            "$ref": "User"
+            },
+          "required": true,
+          "description": "the results"
+        }
+      }
+      },
     "User": {
       "id": "User",
       "properties": {
         "uri": {
-          "type": "string",
+          "type": "uri",
           "required": true,
           "description": "the URI at which this users specifics can be found"
         },

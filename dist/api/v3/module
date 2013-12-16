@@ -14,7 +14,7 @@
           "method": "GET",
           "summary": "Search for modules",
           "notes": "",
-          "responseClass": "Module",
+          "responseClass": "Pagination",
           "nickname": "getModules",
           "parameters": [
             {
@@ -99,6 +99,7 @@
               "name": "user",
               "description": "The name of the user who maintains the module",
               "required": true,
+              "defaultValue": "puppetlabs",
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
@@ -107,6 +108,7 @@
               "name": "module",
               "description": "The name of the module to be queried",
               "required": true,
+              "defaultValue": "ntp",
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
@@ -117,11 +119,54 @@
     }
   ],
   "models": {
+    "Pagination": {
+        "id": "Pagination",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "required": true,
+            "description": "the total number of results available"
+          },
+          "limit": {
+            "type": "integer",
+            "required": true,
+            "description": "the maximum size of the current page"
+          },
+          "offset": {
+            "type": "integer",
+            "required": true,
+            "description": "the index of the first result (zero-based)"
+          },
+          "current": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the current page of results"
+          },
+          "next": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the next page of results"
+          },
+          "previous": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the previous page of results (may be null)"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+            "$ref": "Module"
+            },
+          "required": true,
+          "description": "the results"
+        }
+      }
+      },    
     "Module": {
       "id": "Module",
       "properties": {
         "uri": {
-          "type": "string",
+          "type": "uri",
           "required": true,
           "description": "the URI for this module"
         },
@@ -164,12 +209,12 @@
           "description": "abbreviated release object for all releases of this module"
         },
         "homepage_url": {
-          "type": "string",
+          "type": "uri",
           "required": true,
           "description": "URL for the project's homepage"
         },
         "issues_url": {
-          "type": "string",
+          "type": "uri",
           "required": true,
           "description": "URL for the project's issue tracker"
         }
@@ -179,7 +224,7 @@
       "id": "ReleaseAbbreviated",
       "properties": {
         "uri": {
-          "type": "string",
+          "type": "uri",
           "required": true,
           "description": "the URI for this release"
         },

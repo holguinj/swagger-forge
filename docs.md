@@ -7,9 +7,11 @@ Tools such as the puppet module tool and librarian-puppet use the Forge API to q
 
 Current Version
 ---------------
-The Forge API's current version is `v3`. It’s considered regression-stable, meaning that the returned data is guaranteed to match the schema described here, however, additional data may be added in the future and existing clients may ignore any properties they do not recognize.
+The Forge API's current version is `v3`. It’s considered regression-stable, meaning that the returned data is guaranteed to match the schema described on this page, however, additional data may be added in the future and existing clients may ignore any properties they do not recognize.
 
-The API currently exposes three resource types: [Users](#!/user), [Modules](#!/module) and [Releases](#!/release). Details for these resources, including available parameters and response schemas, can be found within the interactive UI at the top of this page. 
+The API currently exposes three resource types: [Users](#!/user), [Modules](#!/module), and [Releases](#!/release). Details for these resources, including available parameters and response schemas, can be found within the interactive UI at the top of this page.
+
+This version of the API does not currently support authentication or any of the operations that would normally require authentication, such as publishing, updating, or deleting modules.
 
 
 Features

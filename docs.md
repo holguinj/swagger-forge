@@ -20,8 +20,7 @@ Features
 * Blank fields are included as `null`.
 * Nested resources will use an abbreviated representation. A link to the full representation for the resource will always be included.
 * All timestamps are returned in ISO 8601 format: ```YYYY-MM-DD HH:MM:SS ±HHMM```
-* The HTTP response headers include:
-	* Caching hints for [conditional requests](#conditional-requests)
+* The HTTP response headers include caching hints for [conditional requests](#conditional-requests).
 
 
 Errors

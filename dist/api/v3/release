@@ -4,8 +4,7 @@
   "basePath": "http://www.corsproxy.com/forgeapi.puppetlabs.com/v3",
   "resourcePath": "/releases",
   "produces": [
-    "application/json",
-    "application/xml"
+    "application/json"
   ],
   "apis": [
     {
@@ -15,7 +14,7 @@
           "method": "GET",
           "summary": "Get a list of releases",
           "notes": "Returns a paginated list of results.",
-          "responseClass": "Release",
+          "responseClass": "Pagination",
           "nickname": "getReleases",
           "parameters": [
             {
@@ -78,7 +77,15 @@
               "required": false,
               "dataType": "integer",
               "paramType": "query"
-            }
+            },
+            {
+              "name": "If-Modified-Since",
+              "description": "Only processes the request if there has been a change since this time",
+              "defaultValue": "Mon, 16 Dec 2013 22:09:00 GMT",
+              "required": false,
+              "dataType": "date-time",
+              "paramType": "header"
+            }            
           ]
         }
       ]
@@ -97,6 +104,7 @@
               "name": "user",
               "description": "The owner of the module",
               "required": true,
+              "defaultValue": "puppetlabs",
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
@@ -105,6 +113,7 @@
               "name": "module",
               "description": "The module name",
               "required": true,
+              "defaultValue": "ntp",
               "allowMultiple": false,
               "dataType": "string",
               "paramType": "path"
@@ -114,6 +123,7 @@
               "description": "The version number",
               "required": true,
               "allowMultiple": false,
+              "defaultValue": "1.0.0",
               "dataType": "string",
               "paramType": "path"
             }
@@ -123,11 +133,54 @@
     }
   ],
   "models": {
+    "Pagination": {
+        "id": "Pagination",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "required": true,
+            "description": "the total number of results available"
+          },
+          "limit": {
+            "type": "integer",
+            "required": true,
+            "description": "the maximum size of the current page"
+          },
+          "offset": {
+            "type": "integer",
+            "required": true,
+            "description": "the index of the first result (zero-based)"
+          },
+          "current": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the current page of results"
+          },
+          "next": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the next page of results"
+          },
+          "previous": {
+            "type": "uri",
+            "required": "true",
+            "description": "the URI for the previous page of results (may be null)"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+            "$ref": "Release"
+            },
+          "required": true,
+          "description": "the results"
+        }
+      }
+      },    
     "Release": {
       "id": "Release",
       "properties": {
         "uri": {
-          "type": "string",
+          "type": "uri",
           "required": true,
           "description": "the URI for this release"
         },

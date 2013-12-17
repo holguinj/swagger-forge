@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Swagger UI</title>
+  <title>Puppet Forge API</title>
   <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
   <link href='css/highlight.default.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/application.css' media='screen' rel='stylesheet' type='text/css'/>
   <script type="text/javascript" src="lib/shred.bundle.js" /></script>  
   <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+  <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
   <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
   <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
   <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
@@ -14,8 +16,8 @@
   <script src='lib/underscore-min.js' type='text/javascript'></script>
   <script src='lib/backbone-min.js' type='text/javascript'></script>
   <script src='lib/swagger.js' type='text/javascript'></script>
+  <script src='lib/swagger.js' type='text/javascript'></script>
   <script src='swagger-ui.js' type='text/javascript'></script>
-  <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
@@ -52,14 +54,79 @@
 </head>
 
 <body>
-<div id="message-bar" class="swagger-ui-wrap">
-  &nbsp;
-</div>
+<div class="docs"><H1>Puppet Forge API</H1>
+<p>The Puppet Forge API (hereafter referred to as the Forge API) enables you to write scripts and tools that interact with the Puppet Forge website, from customized module publishing to custom aggregations against module metadata. The Forge API provides you quick access to all the data on the Puppet Forge via a RESTful interface.</p>
 
-<div id="swagger-ui-container" class="swagger-ui-wrap">
+<p>Tools such as the puppet module tool and librarian-puppet use the Forge API to query and install modules, and tools like Geppetto or Pulp leverage the API to solve development workflow challenges.</p>
 
-</div>
+<p>You can test out the Forge API interactively on this page with the tool below. Below that, you'll find additional information about errors, date-time fields, and headers.</p>
+</div><!--end docs div-->
 
+<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+<div class="docs">
+<h2>Errors</h2>
+<p>The Puppet Forge API follows RFC 2616 and RFC 6585.</p>
+<p>Error responses will be served with a <code>4xx</code> or <code>5xx</code> status code, and will be sent as a JSON hash with a <code>message</code> key, describing the cause of the failure.</p>
+<code>{ "message": "Cannot parse request body as JSON" }</code>
+<p>If the error has more specific causes (e.g. trying to update a User account with invalid data), an <code>errors</code> key will be provided containing a list of specific problems with the request.</p>
+<pre><code>{
+  "message": "Validation Failed",
+  "errors": [
+    {
+      "resource": "User",
+      "field": "username",
+      "code": "not_unique"
+    },
+    {
+      "resource": "User",
+      "field": "display_name",
+      "code": "missing"
+    }
+  ]
+}</code></pre>
+
+<h2>User-Agent Required</h2>
+  <p>All API requests must include a valid User-Agent header. Requests with no User-Agent header will be rejected. The User-Agent header helps identify your application or library, so we can communicate with you if necessary. If your use of the API is informal or personal, we recommend using your username as the header.</p>
+  <p>User-Agent headers are a list of one or more product descriptions, generally taking the form:</p>
+  <code>&lt;name-without-spaces&gt;/&lt;version&gt; (comments)</code>
+  <p>As an example, the following are all useful User-Agent values:</p>
+  <ul>
+    <li><code>MyApplication/0.0.0 Her/0.6.8 Faraday/0.8.8 Ruby/1.9.3-p194 (i486-linux)</code></li>
+
+    <li><code>My-Library-Name/1.2.4</code></li>
+    
+    <li><code>myusername</code></li>
+  </ul>
+
+<h2>Conditional Requests</h2>
+<p>Most responses return a Last-Modified header, though some responses will also return an ETag header. You can use the values of these headers to make subsequent requests to those resources using the If-Modified-Since and If-None-Match headers. If the resource has not changed, the server will return a <code>304 Not Modified</code>.</p>
+<code>$ curl -I https://forgeapi.puppetlabs.com/v3/users/puppetlabs
+HTTP/1.1 200 OK
+Server: nginx/1.2.1
+Date: Fri, 01 Nov 2013 00:50:13 GMT
+Content-Type: application/json;charset=utf-8
+Content-Length: 252
+Connection: keep-alive
+Status: 200 OK
+X-Frame-Options: sameorigin
+X-XSS-Protection: 1; mode=block
+Cache-Control: public, must-revalidate
+Last-Modified: Mon, 12 Nov 2012 14:51:00 GMT
+X-Node: forgeapi02
+X-Revision: b81ba451f67a95cfd38312093c158a6fdc919b46</code>
+<code>$ curl -I https://forgeapi.puppetlabs.com/v3/users/puppetlabs -H "If-Modified-Since: Mon, 12 Nov 2012 14:51:00 GMT"
+HTTP/1.1 304 Not Modified
+Server: nginx/1.2.1
+Date: Fri, 01 Nov 2013 00:51:28 GMT
+Connection: keep-alive
+Status: 304 Not Modified
+X-Frame-Options: sameorigin
+X-XSS-Protection: 1; mode=block
+Cache-Control: public, must-revalidate
+Last-Modified: Mon, 12 Nov 2012 14:51:00 GMT
+X-Node: forgeapi02
+X-Revision: b81ba451f67a95cfd38312093c158a6fdc919b46</code>
+</div><!--end docs div-->
 </body>
 
 </html>

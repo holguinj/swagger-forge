@@ -46,6 +46,14 @@
               "required": false,
               "dataType": "integer",
               "paramType": "query"
+            },
+            {
+              "name": "If-Modified-Since",
+              "description": "Only processes the request if there has been a change since this time",
+              "defaultValue": "Mon, 16 Dec 2013 22:09:00 GMT",
+              "required": false,
+              "dataType": "date-time",
+              "paramType": "header"
             }
           ]
         }

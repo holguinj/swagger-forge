@@ -1,3 +1,11 @@
 node_modules/
 dist/
 dist/*
+
+src/main/html/index.html
+
+src/main/html/css/application.css
+
+src/main/html/puppet_forge_api.html
+
+src/main/html/puppet_forge_api.md

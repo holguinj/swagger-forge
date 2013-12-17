@@ -58,7 +58,7 @@ User-Agent headers are a list of one or more product descriptions, generally tak
 
 	<name-without-spaces>/<version> (comments)
 
-As an example, the following are all useful User-Agent values:
+For example, the following are all useful User-Agent values:
 
 *	`MyApplication/0.0.0 Her/0.6.8 Faraday/0.8.8 Ruby/1.9.3-p194 (i486-linux)`
 *	`My-Library-Name/1.2.4`
